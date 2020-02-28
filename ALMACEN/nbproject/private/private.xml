@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/vistas/OrdenesCorte.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>1339</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/controller/SucursalController.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>53</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Archivos%20Pc-Diego/Archivos%20Pc-Diego/UNIVERSIDAD%20SAN%20MARCOS/CICLO%2012/SISTEMAS%20DISTRIBUIDOS/PROYECTO%20FINAL/ALMACEN/src/vistas/Principal.java</file>
+            <file>file:/D:/Archivos%20Pc-Diego/Archivos%20Pc-Diego/UNIVERSIDAD%20SAN%20MARCOS/CICLO%2012/SISTEMAS%20DISTRIBUIDOS/PROYECTO%20FINAL/ALMACEN/src/vistas/Pedidos.java</file>
+            <file>file:/D:/Archivos%20Pc-Diego/Archivos%20Pc-Diego/UNIVERSIDAD%20SAN%20MARCOS/CICLO%2012/SISTEMAS%20DISTRIBUIDOS/PROYECTO%20FINAL/ALMACEN/src/dao/ArticuloDao.java</file>
+            <file>file:/D:/Archivos%20Pc-Diego/Archivos%20Pc-Diego/UNIVERSIDAD%20SAN%20MARCOS/CICLO%2012/SISTEMAS%20DISTRIBUIDOS/PROYECTO%20FINAL/ALMACEN/src/database/AccesoDB.java</file>
+        </group>
+    </open-files>
+</project-private>

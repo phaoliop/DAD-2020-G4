@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" isIgnorePagination="true" uuid="772d90a9-c2ce-419e-ad08-3d91cb8c1b88">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="10"/>
+	<parameter name="idOrdenTrabajo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select o.idOrdenDeTrabajo, p.numPedido, o.numOrdenTrabajo,c.codProforma, o.fechaEmision, o.tipoServicio,
+o.recepcion, o.destino, p.dia1, p.dia2, o.fechaInicio, day(o.fechaInicio) as numDiaInicio, month(o.fechaInicio) as numMesInicio,
+    CASE DAYOFWEEK(o.fechaInicio)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaInicio, o.fechaFinal,day(o.fechaFinal) as numDiaFinal, CASE DAYOFWEEK(o.fechaFinal)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaFinal, o.fechaEntrega, day(o.fechaEntrega) as numDiaEntrega, CASE DAYOFWEEK(o.fechaEntrega)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaEntrega, if(DAYOFWEEK(o.fechaInicio)=1,day(o.fechaInicio)-6,if(DAYOFWEEK(o.fechaInicio)=2,day(o.fechaInicio),
+	if(DAYOFWEEK(o.fechaInicio)=3, day(o.fechaInicio)-1,if(DAYOFWEEK(o.fechaInicio)=4,day(o.fechaInicio)-2,
+    if(DAYOFWEEK(o.fechaInicio)=5,day(o.fechaInicio)-3,if(DAYOFWEEK(o.fechaInicio)=6, day(o.fechaInicio)-3,
+    if(DAYOFWEEK(o.fechaInicio)=7,day(o.fechaInicio)-5,null))))))) as LunesCercano, d.item, d.cant, d.descripcion, d.tolerancia 
+ from ordendetrabajo o, detalleordentrabajo d, proforma c, pedido p
+ where (d.idOrdenTrabajofk=o.idOrdenDeTrabajo and o.idPedidofkk=p.idPedido 
+		and p.idProforma_fk=c.idProforma) and o.numOrdenTrabajo=$P{idOrdenTrabajo};]]>
+	</queryString>
+	<field name="idOrdenDeTrabajo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numPedido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numOrdenTrabajo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codProforma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="recepcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="destino" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaInicio" class="java.lang.Long"/>
+	<field name="numMesInicio" class="java.lang.Long"/>
+	<field name="diaInicio" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaFinal" class="java.lang.Long"/>
+	<field name="diaFinal" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaEntrega" class="java.lang.Long"/>
+	<field name="diaEntrega" class="java.lang.String"/>
+	<field name="LunesCercano" class="java.lang.Long"/>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cant" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tolerancia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="dia" class="java.lang.Integer">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="idOrdenDeTrabajo">
+		<groupExpression><![CDATA[$F{idOrdenDeTrabajo}]]></groupExpression>
+		<groupFooter>
+			<band height="1" splitType="Stretch">
+				<line>
+					<reportElement x="0" y="0" width="802" height="1" uuid="3bb40567-f662-4ba9-a803-6f150e1f166c"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="40" uuid="bfc1c0e1-f287-48c2-9961-7665e5232245"/>
+			</rectangle>
+			<textField>
+				<reportElement x="722" y="17" width="54" height="18" uuid="d688577a-f3cd-4a35-b718-220c775e5767"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numOrdenTrabajo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="698" y="16" width="29" height="18" uuid="0b5baf4c-11a9-4152-a0c4-28a79a479b71"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[N°:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="0" width="506" height="40" uuid="00f27f85-18ba-461c-bfe6-01880c88b355"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ORDEN DE TRABAJO INTERNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="668" y="0" width="133" height="16" uuid="d9bc2ee9-dd11-4693-b119-55063557dcab"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Version 5.0]]></text>
+			</staticText>
+			<line>
+				<reportElement x="668" y="12" width="134" height="1" uuid="d7323b30-4876-4c2b-a7f7-f2fa931e8bf8"/>
+			</line>
+			<image>
+				<reportElement x="12" y="3" width="138" height="35" uuid="d474db1c-a867-4bdc-abc3-da7c36f9d685"/>
+				<imageExpression><![CDATA["\\\\ARCRODINPC-01\\Archivos Arcrodin\\LOGO ARCRODIN.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement x="667" y="-40" width="1" height="40" uuid="e6a51813-128b-4c86-b003-81b1c947255c"/>
+			</line>
+			<staticText>
+				<reportElement x="7" y="8" width="78" height="11" uuid="4dbb7f62-8a16-4296-a5b3-2a5f099910d2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NRO COTIZACION  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="8" width="37" height="11" uuid="fc59fced-9610-40ff-aa71-bafb01019878"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codProforma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="22" width="78" height="11" uuid="79c0bc7d-6963-42f3-9824-71daf6541e1f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO DE SERVICIO ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="22" width="190" height="11" uuid="dd5ea4d4-6253-4b42-9d99-1753fd8481b6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoServicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="8" width="68" height="11" uuid="eaaf4af7-0f1e-4970-abf5-086a1db00aeb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NRO DE PEDIDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="22" width="68" height="11" uuid="122d0c39-14de-4896-8130-4b7c1b4c1681"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RECEPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="22" width="4" height="11" uuid="0d81d37c-f292-483e-992a-02c1ae4be376"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="000000">
+				<reportElement x="365" y="8" width="35" height="11" uuid="9ccc4975-0311-48bc-89f6-f25bf74eb6a8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="22" width="100" height="11" uuid="6f586586-d497-4680-8384-66101aa765c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recepcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="585" y="8" width="71" height="11" uuid="d62e8c10-c394-4bc0-b4ea-024018453d19"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA EMISION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="585" y="22" width="71" height="11" uuid="34909776-90b8-4885-b3c9-175d388cfdba"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SERVICIO PARA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="655" y="22" width="100" height="11" uuid="97027a5e-3446-4398-a27a-09d2fbdf3eea"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="655" y="8" width="100" height="11" uuid="102d9778-ae39-4446-9c40-e7fa0bc36e54"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="161" y="-40" width="1" height="40" uuid="9bc16336-c086-49ac-a033-18e4f3b392fc"/>
+			</line>
+			<staticText>
+				<reportElement x="81" y="8" width="4" height="11" uuid="bfca1abc-7c86-4103-a212-3dc52c315d62"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="22" width="4" height="11" uuid="9469dfde-8f3e-4472-b492-740558160ada"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="28" height="17" uuid="b828d37f-8530-4f9b-b01a-53b2f60ee4a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="36" height="17" uuid="b6a65fc5-1f0d-4c3a-a0b5-58da21dfbb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="621" height="16" uuid="fa8af284-74fc-439b-9dbc-588eca7addd0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION GENERAL DEL TRABAJO EN CURSO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="689" y="0" width="112" height="16" uuid="60c37cf2-4542-43ad-a475-df97f0767ac5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TOLERANCIA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="b7baf571-7a1c-4d2b-a475-ee4e5c6da86a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="17" uuid="5e689e61-e20e-4c44-a2fb-ae9df7bcfd1c"/>
+			</line>
+			<line>
+				<reportElement x="66" y="0" width="1" height="17" uuid="095e6afe-9c8e-424d-97f4-d2704c3441a5"/>
+			</line>
+			<line>
+				<reportElement x="29" y="0" width="1" height="17" uuid="6104f50f-6a62-4882-a7b7-330fd5f78187"/>
+			</line>
+			<line>
+				<reportElement x="1" y="16" width="801" height="1" uuid="195ef815-beea-4d3a-925b-654ac863fe2b"/>
+			</line>
+			<line>
+				<reportElement x="688" y="0" width="1" height="17" uuid="a0c9ab7b-fbe7-495a-a16f-8674850564ce"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="17" uuid="1eb5f0c9-5dcc-4a47-80fc-19ccf9253dd4"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="0" width="22" height="13" uuid="3bb35055-da9e-4c0b-a7d8-324631f074b2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="0" width="615" height="13" uuid="f5aad54d-bf60-4e7c-8bb0-a49a26336646"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="0" width="22" height="13" uuid="c55e1444-ce17-468c-bcf9-8085ced744bc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="29" y="-1" width="1" height="14" uuid="19fa7a7d-cb72-42bb-bc99-190b98ee4127"/>
+			</line>
+			<line>
+				<reportElement x="66" y="-1" width="1" height="14" uuid="aca0be10-fe1b-48e6-9645-7509459d0afc"/>
+			</line>
+			<textField>
+				<reportElement x="695" y="0" width="107" height="13" forecolor="#FF0000" uuid="d396c5cf-9654-470c-88f0-c390b91b4a0b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tolerancia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="688" y="0" width="1" height="13" uuid="d73df8fd-23e3-4da0-b091-32849ccc6120"/>
+			</line>
+			<line>
+				<reportElement x="801" y="-1" width="1" height="14" uuid="65bc926b-246e-44f2-b8f7-a8dcb6e6372c"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="13" uuid="4c6139ff-45c1-4a50-82ac-87062a6cc53d"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="180" splitType="Stretch">
+			<textField>
+				<reportElement x="191" y="6" width="12" height="13" uuid="95cf88f4-3804-46b8-813d-8085b1eb516c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dia1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="6" width="10" height="13" uuid="9030d03e-34ee-44c4-9dd1-1d650e41c91a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="215" y="6" width="12" height="13" uuid="16dc413e-cb85-461e-b620-0b307c81e452"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dia2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="227" y="6" width="78" height="13" uuid="cf4995d2-8a2e-4e36-ba8e-df2770965f23"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIAS HABILES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="42" width="4" height="13" uuid="8be39d2c-ca90-4a49-ba63-711ef15236b0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="30" width="4" height="13" uuid="0ad7d1ea-0e39-4f39-9ab0-1c3443faf79b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="18" width="4" height="13" uuid="441b0617-eb13-45c6-813b-2736011fbf82"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="18" width="114" height="13" uuid="df1aa52f-153b-4c6c-94c9-32faa2d60820"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="30" width="114" height="13" forecolor="#FF0000" uuid="2aa59c13-e340-431a-97de-ac3e01ea1d5d"/>
+				<textFieldExpression><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="42" width="114" height="13" uuid="1f54432f-2a96-41e4-a97c-23d4e9c69db5"/>
+				<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="6" width="4" height="13" uuid="a7767278-c60c-4558-be4d-618da245a458"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="6" width="320" height="13" uuid="9f8d2a05-dd48-4fac-bad5-484c3407a202"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVISAR EN OFICINA CUANDO LA ORDEN DE TRABAJO ESTE CONCLUIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="18" width="38" height="13" uuid="c44d80d3-550a-4072-8526-9e08d3995186"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 1:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="18" width="282" height="13" uuid="a8c7d29e-1dda-4b35-9cb4-4872b97b2cd4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[USAR FILM Y CARTON PARA EL DESPACHO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="30" width="38" height="13" uuid="7087448d-a157-4fb1-b5d9-b8a96f292531"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 2:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="42" width="38" height="13" uuid="239c364e-75af-4fa8-acc2-83790d15ccdb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 3:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="30" width="282" height="13" uuid="a35b399c-277d-47c5-a309-686b86c97510"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TODOS LOS COMPONENTES DEBEN ESTRA PROTEGIDOS CON ACEITE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="42" width="282" height="13" uuid="7e0c7832-c301-45d3-b3bd-11083a814054"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TODOS LOS VASTAGOS, DEBEN ESTAR PINTADOS (BUEN ACABADO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="171" height="13" uuid="7b793b63-bbd9-469a-a7d4-1e8346a102c7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIAS HABILES EN PLANTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="18" width="171" height="13" uuid="1abd0176-6380-4a83-a6aa-351699cb46c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA INGRESO DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="181" height="13" forecolor="#FF0000" uuid="38069dda-6485-4b9a-99e7-2c43477be103"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA FINALIZACION DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="171" height="13" uuid="45b5cb5f-7fee-4b0a-911c-381f8359a65c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA ENTREGA DE TRABAJO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="68" width="291" height="111" uuid="47877e9d-5d2a-4347-ba91-da5c56b07f76"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="482" y="68" width="321" height="111" uuid="193f554c-d054-43a0-9968-220d4eb74172"/>
+			</rectangle>
+			<line>
+				<reportElement x="1" y="81" width="291" height="1" uuid="26143741-bdd5-4f29-88d3-456fcc8b3dcd"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="68" width="291" height="13" uuid="eb5664dc-1b7c-48ac-8dda-f91757672232"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MEDIDAS AL INGRESO DEL COMPONENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="482" y="81" width="321" height="1" uuid="2b34ec11-fdb6-4121-9704-ce2d2ab5ded2"/>
+			</line>
+			<staticText>
+				<reportElement x="482" y="68" width="321" height="15" uuid="0602de36-3fd7-4683-9c3e-0b1483a88195"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MEDIDAS AL FINALIZAR COMPONENTE]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

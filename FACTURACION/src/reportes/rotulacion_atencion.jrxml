@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rotulacion_atencion" language="groovy" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0f1ca3a5-19f7-456a-82b1-9839ca400621">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="102"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idRotulacion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select r.idRotulacion, r.remitente, c.razonSocial,concat(l.nombres,' ', l.apellidos,' D.N.I.:',l.dni), r.destino
+from rotulacion r, rotulacionatencion a, cliente c, contactocliente l
+where  (a.fkkidContactoCliente=l.idContactoCliente 
+		and r.fkkidCliente=c.idCliente 
+        and a.idRotulacionfk=r.idRotulacion) and a.idRotulacionfk=$P{idRotulacion};]]>
+	</queryString>
+	<field name="idRotulacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remitente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concat(l.nombres,&apos; &apos;, l.apellidos,&apos; D.N.I.:&apos;,l.dni)" class="java.lang.String"/>
+	<field name="destino" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="idRotulacion">
+		<groupExpression><![CDATA[$F{idRotulacion}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="0" width="752" height="26" uuid="4b8d8c07-f7f1-4590-b24b-654bb0e9134c"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat(l.nombres,' ', l.apellidos,' D.N.I.:',l.dni)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

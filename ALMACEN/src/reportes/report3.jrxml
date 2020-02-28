@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2399b2dc-593b-46ab-8157-6f8512965190">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="319"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="fechaIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select idCajaChica, fechaCaja, descripcionCaja, egreso, ingreso, sum(egreso) as TotalEgreso, sum(ingreso) as TotalIngreso
+from cajachica where  fechaCaja  between $P{fechaIni} and $P{fechaFin}
+group by idCajaChica
+order by fechaCaja asc, idCajaChica asc;]]>
+	</queryString>
+	<field name="idCajaChica" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaCaja" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcionCaja" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="egreso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingreso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalEgreso" class="java.lang.Double"/>
+	<field name="TotalIngreso" class="java.lang.Double"/>
+	<group name="idCajaChica">
+		<groupExpression><![CDATA[$F{idCajaChica}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="131" y="3" width="323" height="34" uuid="bf03a5d1-bfb7-4c1d-92cc-926f46a748ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Reporte Caja Chica]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="3" width="150" height="40" uuid="48fb9b50-c2c3-4888-8b3d-049d430b1fce"/>
+				<imageExpression><![CDATA["\\\\ARCRODINPC-01\\Archivos Arcrodin\\LOGO ARCRODIN.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="454" y="4" width="100" height="36" uuid="a41a5562-e643-4ced-82e6-98d31ed034b3"/>
+			</rectangle>
+			<line>
+				<reportElement x="454" y="21" width="100" height="1" uuid="4cabe036-c2cc-4b3d-ae25-b0d6126fc70a"/>
+			</line>
+			<staticText>
+				<reportElement x="454" y="4" width="100" height="17" uuid="b7e3e405-8fb1-482f-be66-4775fbe78e39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Versión 2.0]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="454" y="22" width="100" height="18" uuid="8ea8cb06-8c1d-4744-b6db-ec42d8e7f2b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="22" width="555" height="1" uuid="7809237b-4799-4079-a56e-f4bb99c4f905"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="8" width="43" height="15" uuid="68c2bf61-e65f-4662-b4d3-612d8bd60f82"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="47" y="8" width="150" height="15" uuid="9935081b-e604-4c45-9de3-4883a12846a6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="8" width="51" height="15" uuid="d593d057-bac8-4a74-b19c-156484f277bf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Egreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="495" y="8" width="51" height="15" uuid="7188a103-49c0-418e-81c0-98d5ffdfbcb2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Ingreso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="8" width="555" height="1" uuid="3effb61d-0f60-4aaf-aff5-9cb3ad776858"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="0" y="0" width="43" height="9" uuid="de344428-57e5-4d15-a12d-5e11f1ce251e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaCaja}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement style="Detail" x="494" y="0" width="51" height="9" uuid="341c52ff-b3bb-405d-b8f3-bd59c1b15c7c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ingreso}!=""?
+$F{ingreso}:0.00)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="47" y="0" width="414" height="9" uuid="d0fbdb93-6e10-4daf-bd68-c08201d81cea"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionCaja}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement style="Detail" x="442" y="0" width="51" height="9" uuid="f747c0fe-ca57-4cf6-89b6-ecb8863dc4f1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{egreso}!=""?
+$F{egreso}:0.00)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="e0615620-3510-4d92-a424-67ca1a39aeee"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="873095bf-e412-46f9-8d60-935867b774ab"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="20014264-faaf-42ef-bfc3-a2e7f1528a7c"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<subreport>
+				<reportElement x="382" y="0" width="170" height="50" uuid="4e18da64-9f49-4b7e-a16a-08fadc4f26a2"/>
+				<subreportParameter name="fechaIni">
+					<subreportParameterExpression><![CDATA[$P{fechaIni}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaFin">
+					<subreportParameterExpression><![CDATA[$P{fechaFin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

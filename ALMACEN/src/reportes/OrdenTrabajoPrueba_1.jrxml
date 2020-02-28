@@ -1,0 +1,1907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" whenResourceMissingType="Error" isIgnorePagination="true" uuid="772d90a9-c2ce-419e-ad08-3d91cb8c1b88">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="64"/>
+	<parameter name="idOrdenTrabajo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR1" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR1}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR2" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR2}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR3" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR3}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR4" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR4}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cli.codigoCliente, o.idOrdenDeTrabajo, p.numPedido, o.numOrdenTrabajo,c.codProforma, o.fechaEmision, o.tipoServicio,
+o.recepcion, o.destino, p.dia1, p.dia2, o.fechaInicio, day(o.fechaInicio) as numDiaInicio, month(o.fechaInicio) as numMesInicio,
+    CASE DAYOFWEEK(o.fechaInicio)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaInicio, o.fechaFinal,day(o.fechaFinal) as numDiaFinal, CASE DAYOFWEEK(o.fechaFinal)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaFinal, o.fechaEntrega, day(o.fechaEntrega) as numDiaEntrega, CASE DAYOFWEEK(o.fechaEntrega)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaEntrega, if(DAYOFWEEK(o.fechaInicio)=1,date_sub(o.fechaInicio, interval 6 day),if(DAYOFWEEK(o.fechaInicio)=2, o.fechaInicio,
+	if(DAYOFWEEK(o.fechaInicio)=3, date_sub(o.fechaInicio, interval 1 day),if(DAYOFWEEK(o.fechaInicio)=4,date_sub(o.fechaInicio, interval 2 day),
+    if(DAYOFWEEK(o.fechaInicio)=5,date_sub(o.fechaInicio, interval 3 day),if(DAYOFWEEK(o.fechaInicio)=6, date_sub(o.fechaInicio, interval 4 day),
+    if(DAYOFWEEK(o.fechaInicio)=7,date_sub(o.fechaInicio, interval 5 day),null))))))) as LunesCercano, d.item, d.cant, d.descripcion, d.tolerancia, o.medidasIngreso, o.medidasFinaliza
+ from ordendetrabajo o, detalleordentrabajo d, proforma c, pedido p, cliente cli
+ where (d.idOrdenTrabajofk=o.idOrdenDeTrabajo and o.idPedidofkk=p.idPedido 
+		and p.idProforma_fk=c.idProforma and p.idClientefk=cli.idCliente ) and     o.idOrdenDeTrabajo=$P{idOrdenTrabajo};]]>
+	</queryString>
+	<field name="codigoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idOrdenDeTrabajo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numPedido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numOrdenTrabajo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codProforma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="recepcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="destino" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaInicio" class="java.lang.Long"/>
+	<field name="numMesInicio" class="java.lang.Long"/>
+	<field name="diaInicio" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaFinal" class="java.lang.Long"/>
+	<field name="diaFinal" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaEntrega" class="java.lang.Long"/>
+	<field name="diaEntrega" class="java.lang.String"/>
+	<field name="LunesCercano" class="java.sql.Date"/>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cant" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tolerancia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medidasIngreso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medidasFinaliza" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="dia" class="java.lang.Integer">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="seleccion" class="java.lang.String"/>
+	<group name="idOrdenDeTrabajo">
+		<groupExpression><![CDATA[$F{idOrdenDeTrabajo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="40" uuid="bfc1c0e1-f287-48c2-9961-7665e5232245"/>
+			</rectangle>
+			<textField>
+				<reportElement x="722" y="17" width="54" height="18" uuid="d688577a-f3cd-4a35-b718-220c775e5767"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numOrdenTrabajo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="698" y="16" width="29" height="18" uuid="0b5baf4c-11a9-4152-a0c4-28a79a479b71"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[N°:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="0" width="506" height="40" uuid="00f27f85-18ba-461c-bfe6-01880c88b355"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ORDEN DE TRABAJO INTERNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="668" y="0" width="133" height="16" uuid="d9bc2ee9-dd11-4693-b119-55063557dcab"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Version 5.0]]></text>
+			</staticText>
+			<line>
+				<reportElement x="668" y="12" width="134" height="1" uuid="d7323b30-4876-4c2b-a7f7-f2fa931e8bf8"/>
+			</line>
+			<image>
+				<reportElement x="12" y="3" width="138" height="35" uuid="d474db1c-a867-4bdc-abc3-da7c36f9d685"/>
+				<imageExpression><![CDATA["\\\\ARCRODINPC-01\\Archivos Arcrodin\\LOGO ARCRODIN.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<line>
+				<reportElement x="667" y="-40" width="1" height="40" uuid="e6a51813-128b-4c86-b003-81b1c947255c"/>
+			</line>
+			<staticText>
+				<reportElement x="257" y="8" width="78" height="11" uuid="4dbb7f62-8a16-4296-a5b3-2a5f099910d2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NRO COTIZACION  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="8" width="37" height="11" uuid="fc59fced-9610-40ff-aa71-bafb01019878"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codProforma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="22" width="78" height="11" uuid="79c0bc7d-6963-42f3-9824-71daf6541e1f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO DE SERVICIO ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="22" width="345" height="11" uuid="dd5ea4d4-6253-4b42-9d99-1753fd8481b6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoServicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="459" y="8" width="68" height="11" uuid="eaaf4af7-0f1e-4970-abf5-086a1db00aeb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NRO DE PEDIDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="22" width="68" height="11" uuid="122d0c39-14de-4896-8130-4b7c1b4c1681"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RECEPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="523" y="22" width="4" height="11" uuid="0d81d37c-f292-483e-992a-02c1ae4be376"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="000000">
+				<reportElement x="532" y="8" width="35" height="11" uuid="9ccc4975-0311-48bc-89f6-f25bf74eb6a8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="531" y="22" width="100" height="11" uuid="6f586586-d497-4680-8384-66101aa765c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recepcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="652" y="8" width="71" height="11" uuid="d62e8c10-c394-4bc0-b4ea-024018453d19"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA EMISION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="652" y="22" width="71" height="11" uuid="34909776-90b8-4885-b3c9-175d388cfdba"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SERVICIO PARA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="722" y="22" width="80" height="11" uuid="97027a5e-3446-4398-a27a-09d2fbdf3eea"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="722" y="8" width="80" height="11" uuid="102d9778-ae39-4446-9c40-e7fa0bc36e54"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="161" y="-40" width="1" height="40" uuid="9bc16336-c086-49ac-a033-18e4f3b392fc"/>
+			</line>
+			<staticText>
+				<reportElement x="329" y="8" width="4" height="11" uuid="bfca1abc-7c86-4103-a212-3dc52c315d62"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="22" width="4" height="11" uuid="9469dfde-8f3e-4472-b492-740558160ada"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="8" width="4" height="11" uuid="1c8f8022-ac11-46bc-93cc-5872cc01fe80"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="8" width="74" height="11" uuid="765ee616-bba0-4316-980d-e57075aa63ad"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO CLIENTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="8" width="100" height="11" uuid="33cab354-1ebf-43bf-9dfb-a4cc9ccace10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoCliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="28" height="17" uuid="b828d37f-8530-4f9b-b01a-53b2f60ee4a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="36" height="17" uuid="b6a65fc5-1f0d-4c3a-a0b5-58da21dfbb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="523" height="16" uuid="fa8af284-74fc-439b-9dbc-588eca7addd0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION GENERAL DEL TRABAJO EN CURSO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="b7baf571-7a1c-4d2b-a475-ee4e5c6da86a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="17" uuid="5e689e61-e20e-4c44-a2fb-ae9df7bcfd1c"/>
+			</line>
+			<line>
+				<reportElement x="66" y="0" width="1" height="17" uuid="095e6afe-9c8e-424d-97f4-d2704c3441a5"/>
+			</line>
+			<line>
+				<reportElement x="29" y="0" width="1" height="17" uuid="6104f50f-6a62-4882-a7b7-330fd5f78187"/>
+			</line>
+			<line>
+				<reportElement x="1" y="16" width="801" height="1" uuid="195ef815-beea-4d3a-925b-654ac863fe2b"/>
+			</line>
+			<line>
+				<reportElement x="698" y="0" width="1" height="17" uuid="a0c9ab7b-fbe7-495a-a16f-8674850564ce"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="17" uuid="1eb5f0c9-5dcc-4a47-80fc-19ccf9253dd4"/>
+			</line>
+			<line>
+				<reportElement x="590" y="0" width="1" height="16" uuid="c49bfa69-a4bb-48fe-ba39-54256eb2e238"/>
+			</line>
+			<staticText>
+				<reportElement x="590" y="0" width="108" height="16" uuid="60c37cf2-4542-43ad-a475-df97f0767ac5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TOLERANCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="698" y="0" width="103" height="16" uuid="092a2d70-783f-4132-93ba-25819ef550ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OPERARIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="287">
+			<line>
+				<reportElement x="0" y="0" width="1" height="217" uuid="93487579-8023-4ed9-be03-c6cf846a3e03"/>
+			</line>
+			<line>
+				<reportElement x="29" y="-1" width="1" height="218" uuid="222aa92f-31e0-4ce8-897c-9b7f7bb7053c"/>
+			</line>
+			<subreport>
+				<reportElement x="8" y="0" width="10" height="13" uuid="142b4a4a-2bcf-4c62-9b31-6ab1d778ce7a"/>
+				<subreportParameter name="idOrdenTrabajo">
+					<subreportParameterExpression><![CDATA[$F{idOrdenDeTrabajo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR1}]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="217" width="801" height="1" uuid="dd7ec4ee-eef3-442c-a86f-c53c0f63f1cb"/>
+			</line>
+			<line>
+				<reportElement x="801" y="-1" width="1" height="218" uuid="6ae67385-fd36-4a81-b616-1c6acf5e024c"/>
+			</line>
+			<line>
+				<reportElement x="66" y="-1" width="1" height="218" uuid="29b733f3-b50a-4c10-bd0a-134e1fbdf914"/>
+			</line>
+			<line>
+				<reportElement x="698" y="-1" width="1" height="218" uuid="bd50b2f1-b745-4c83-84d1-fe3d053e1552"/>
+			</line>
+			<subreport>
+				<reportElement x="42" y="1" width="10" height="13" uuid="df506367-e497-4268-8742-3a7023d6d1b3"/>
+				<subreportParameter name="idOrdenTrabajo">
+					<subreportParameterExpression><![CDATA[$F{idOrdenDeTrabajo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="68" y="0" width="522" height="14" uuid="27a6bf3e-8410-4203-9f38-dc31e2ac3050"/>
+				<subreportParameter name="idOrdenTrabajo">
+					<subreportParameterExpression><![CDATA[$F{idOrdenDeTrabajo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="593" y="0" width="101" height="13" uuid="431805a7-9f2d-4888-92da-893c28ef9bc6"/>
+				<subreportParameter name="idOrdenTrabajo">
+					<subreportParameterExpression><![CDATA[$F{idOrdenDeTrabajo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR4}]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement x="0" y="229" width="802" height="47" uuid="9931aa3f-694a-49c2-bc4a-54235f7e939e"/>
+			</rectangle>
+			<line>
+				<reportElement x="15" y="229" width="1" height="47" uuid="31563190-a326-40b5-ac5f-6d73afd0bbdc"/>
+			</line>
+			<line>
+				<reportElement x="32" y="229" width="1" height="47" uuid="d1e54dd6-79ca-48d5-9636-e75df922419a"/>
+			</line>
+			<line>
+				<reportElement x="48" y="229" width="1" height="47" uuid="1d60353b-f428-4a9d-b394-eb5c85fa952e"/>
+			</line>
+			<line>
+				<reportElement x="65" y="229" width="1" height="47" uuid="47b84c07-441f-4f98-baad-d52daac3979c"/>
+			</line>
+			<line>
+				<reportElement x="81" y="229" width="1" height="47" uuid="b421fb55-283b-40e0-86bb-c916c84e3226"/>
+			</line>
+			<line>
+				<reportElement x="97" y="229" width="1" height="47" uuid="4173dc3b-0ebf-4d5a-8a8c-91b9259431c6"/>
+			</line>
+			<line>
+				<reportElement x="114" y="229" width="1" height="47" uuid="66774ac9-428e-4414-a6b3-0a0bd5996c21"/>
+			</line>
+			<line>
+				<reportElement x="130" y="229" width="1" height="47" uuid="401aff55-a8f7-42e6-a848-5f07cce15734"/>
+			</line>
+			<line>
+				<reportElement x="146" y="229" width="1" height="47" uuid="91992ed1-3165-434c-94b0-129305899ab9"/>
+			</line>
+			<line>
+				<reportElement x="163" y="229" width="1" height="47" uuid="d1a2373b-27b3-4a6c-a119-da91371baf20"/>
+			</line>
+			<line>
+				<reportElement x="180" y="229" width="1" height="47" uuid="56a9b087-628c-47d3-93bc-b299871eca18"/>
+			</line>
+			<line>
+				<reportElement x="197" y="229" width="1" height="47" uuid="0609efcc-bc60-4983-bece-547f5b31d815"/>
+			</line>
+			<line>
+				<reportElement x="214" y="229" width="1" height="47" uuid="ccf4d0e6-976c-47f3-9911-3edf62096b97"/>
+			</line>
+			<line>
+				<reportElement x="230" y="229" width="1" height="47" uuid="b6b622af-15af-4d58-9700-77bf53b3e04a"/>
+			</line>
+			<line>
+				<reportElement x="247" y="229" width="1" height="47" uuid="4e938b1a-7c3d-49b7-b1f6-892f0387bdf6"/>
+			</line>
+			<line>
+				<reportElement x="264" y="229" width="1" height="47" uuid="ccca9e90-334e-4aa8-ae37-b4419508bd60"/>
+			</line>
+			<line>
+				<reportElement x="281" y="229" width="1" height="47" uuid="31cbaf07-0c13-4eb8-b59e-9fcd7198af99"/>
+			</line>
+			<line>
+				<reportElement x="298" y="229" width="1" height="47" uuid="763f1fac-9c9b-4253-9438-d8d9a41862ce"/>
+			</line>
+			<line>
+				<reportElement x="314" y="229" width="1" height="47" uuid="9feb4232-6e78-44db-992a-811130c35552"/>
+			</line>
+			<line>
+				<reportElement x="331" y="229" width="1" height="47" uuid="8a23f6d1-407d-4da8-a95b-d1fcfda1af51"/>
+			</line>
+			<line>
+				<reportElement x="348" y="229" width="1" height="47" uuid="1fa9511c-ff25-4798-96b2-cb276a14804a"/>
+			</line>
+			<line>
+				<reportElement x="364" y="229" width="1" height="47" uuid="3ae049e0-eae9-414e-a2fd-6007647180f4"/>
+			</line>
+			<line>
+				<reportElement x="482" y="229" width="1" height="47" uuid="041ac410-58f1-43a0-9ce0-b15f908b78e6"/>
+			</line>
+			<line>
+				<reportElement x="498" y="229" width="1" height="47" uuid="6d0b9bb6-88e8-4180-9bee-1b9911729932"/>
+			</line>
+			<textField pattern="dd-MMM">
+				<reportElement x="16" y="240" width="16" height="24" uuid="291bc93e-f013-425a-93d5-1c9e872f4573"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+1]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="32" y="240" width="16" height="24" uuid="eb857f2c-a228-4a7b-be0f-6d9e2e5d7496"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+2]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="49" y="240" width="16" height="24" uuid="66ec56c3-a843-4a0b-90ec-9652a9d0e2a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+3]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="66" y="240" width="16" height="24" uuid="013bba1b-6038-4e93-9489-5ff6027fd15f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+4]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="81" y="240" width="16" height="24" uuid="3d1ae0e9-c6eb-4e36-97f5-bdf1d41cf25d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+5]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="98" y="240" width="16" height="24" uuid="7486bb26-5fd0-450c-9295-b0eaebd94f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+6]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="114" y="240" width="16" height="24" uuid="129c7060-3dc0-44b9-8e2a-3a13553b617f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+7]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="130" y="240" width="16" height="24" uuid="e5d8a8b0-f7e8-4d04-8c84-e48fc6f65043"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+8]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="147" y="240" width="16" height="24" uuid="8c824daa-99a4-468b-9661-1f97cbdab289"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+9]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="164" y="240" width="16" height="24" uuid="6b9b16e5-ef77-4c8d-85d0-b94e32b3d038"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+10]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="181" y="240" width="16" height="24" uuid="b97fa72c-bb55-4694-86a3-73297e8df7b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+11]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="198" y="240" width="16" height="24" uuid="063c16db-5fd3-4d21-b249-21bee6b43f18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+12]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="215" y="240" width="15" height="24" uuid="a61658ee-a8cd-40ec-b7e7-f8d73e50e075"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+13]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="231" y="240" width="16" height="24" uuid="7132df42-3fb3-48da-98b8-3013996dbf4e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+14]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="248" y="240" width="16" height="24" uuid="a1553011-1c20-43ec-8021-839badd572f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+15]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="265" y="240" width="16" height="24" uuid="af604e2a-8e50-4af2-ab53-34e4ddfd07e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+16]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="282" y="240" width="16" height="24" uuid="7d616604-4f6c-4b51-a2f5-54a8c590ba62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+17]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="299" y="240" width="15" height="24" uuid="67bac661-ff23-4fb7-866e-d8bb4202e6a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+18]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="315" y="240" width="16" height="24" uuid="83bdb650-6d25-4256-a4f8-7b6a05c59d11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+19]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="332" y="240" width="16" height="24" uuid="c44c49c5-b5d1-4319-b97b-b4e1242fbba9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+20]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="349" y="240" width="15" height="24" uuid="02b004c6-26c3-423d-bf86-800721fd5911"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+21]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="365" y="240" width="16" height="24" uuid="4c154f36-d69c-40ce-8f0c-5eacd38419c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+22]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="382" y="240" width="16" height="24" uuid="2f6b1418-d73f-416f-92f9-fea197b63c66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+23]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="399" y="240" width="15" height="24" uuid="e955374c-bbf5-4ac6-b322-b49683be0ad8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+24]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="264" width="17" height="12" uuid="a0ae34d3-a28c-4212-b0b2-92172c8ceb9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+3)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+3)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+3)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="264" width="16" height="12" uuid="11bdb3dc-fd49-4aab-80d0-d2fc08eacd64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+4)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+4)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+4)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="264" width="16" height="12" uuid="291ff339-b842-4cf9-813d-288a8fca747b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+7)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+7)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+7)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="229" width="16" height="11" uuid="4ce012ba-7b23-4258-9b2b-132139a4d7b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="229" width="16" height="11" uuid="18d37efc-92a3-4096-b07a-337314de10cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="229" width="16" height="11" uuid="445b0bcf-15de-4f2d-95ee-192d89206f4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="229" width="16" height="11" uuid="7ae33835-b852-493e-8b7d-8fec060bcb45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="229" width="15" height="11" uuid="961c1e34-cf39-44c5-a065-e6451b96d4a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="229" width="16" height="11" uuid="92ac8692-e063-42bd-a201-9728d51869e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="229" width="16" height="11" uuid="9f314217-ac22-44fb-ae95-132bced19f76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="229" width="16" height="11" uuid="2064f887-87f3-4981-a7e9-ea75697c0f2c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="229" width="16" height="11" uuid="1eed75c8-0911-46c8-9d7e-a6f831cc8ca7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="229" width="16" height="11" uuid="b94425c6-818c-4f71-8fa7-7ec1a20460b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="229" width="16" height="11" uuid="1f518386-575e-4ce2-a843-79d437b4aced"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="229" width="16" height="11" uuid="d3db2aa6-a721-4685-8b43-74ba2df8d0db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="229" width="15" height="11" uuid="07bbfeab-24bb-45fb-bf88-66ca270b229d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="229" width="17" height="11" uuid="7ec579da-4051-4092-b0be-47ca5b4368f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="229" width="16" height="11" uuid="df4d01a8-aafb-4360-b263-f46f757e32b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="229" width="16" height="11" uuid="c9af7311-90ab-4641-9d54-4a0f3ad1a796"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="229" width="16" height="11" uuid="c7f84c51-a4e5-476f-b0fc-efa24347c8d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="229" width="15" height="11" uuid="424f3183-c61c-4149-b2c1-96314100dd6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="229" width="16" height="11" uuid="01293b77-3de2-46a2-9793-2dbadbd66791"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="229" width="16" height="11" uuid="2eba94e3-5d77-4231-a97a-001d39f6498f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="229" width="15" height="11" uuid="7687d6e1-37fe-4628-9b3c-23e282327500"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="229" width="17" height="11" uuid="4f280260-1bf2-4ac5-b610-bfbe3253c0e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="229" width="16" height="11" uuid="c28f341a-1177-4686-a5d6-e70133f337ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="229" width="15" height="11" uuid="f380f5f2-0432-4892-bcee-0e2e1422e0e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="16" y="264" width="16" height="12" uuid="e1523b19-3123-4be1-a42c-dc8bd4078ec6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+1)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+1)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+1)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="264" width="15" height="12" uuid="f7cab3be-c50f-4874-8f20-284ab99a102d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+2)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+2)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+2)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="264" width="16" height="12" uuid="b1d0ce72-4401-455e-b763-38340ee733e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+5)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+5)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+5)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="264" width="16" height="12" uuid="33f1c936-267f-4aa8-ac6f-1bcff1c48230"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+6)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+6)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+6)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="264" width="16" height="12" uuid="cb952169-12e3-4fa3-8b87-94f520764222"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+8)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+8)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+8)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="264" width="16" height="12" uuid="7804098f-aca8-47cf-8276-1410a9f8ccaf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+9)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+9)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+9)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="264" width="16" height="12" uuid="e01c22d1-57cb-4975-9f16-9d619bd67888"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+10)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+10)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+10)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="264" width="16" height="12" uuid="b530cf94-f81e-4c74-b6ca-e5784e911b20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+11)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+11)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+11)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="264" width="17" height="12" uuid="a722f168-0f6a-4132-8cb0-710cd408dd6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+12)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+12)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+12)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="264" width="16" height="12" uuid="99628250-e37e-4c00-9e42-8f2c1e1a945c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+13)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+13)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+13)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="264" width="16" height="12" uuid="7e44b974-2b4f-45f5-85cf-354b4c16aac8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+14)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+14)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+14)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="264" width="15" height="12" uuid="ce275153-4356-49a5-bf3b-91d3fcdaf851"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+15)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+15)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+15)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="264" width="17" height="12" uuid="81ba25dd-d275-49ee-a8c9-618c6650eff7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+16)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+16)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+16)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="264" width="16" height="12" uuid="530c7ffb-ae9a-4a32-a0ce-7d81136311c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+17)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+17)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+17)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="264" width="15" height="12" uuid="8873e2f6-b47d-442f-8e1b-d8bee1281291"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+18)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+18)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+18)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="314" y="264" width="17" height="12" uuid="91ac8693-1899-42cb-9909-b3f92f4c1be6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+19)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+19)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+19)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="264" width="15" height="12" uuid="af1e9899-1581-436c-9ebc-34b9c3a92eb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+20)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+20)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+20)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="264" width="15" height="12" uuid="54eb9fa0-bef0-4623-ac30-30e443bb7dfe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+21)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+21)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+21)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="264" width="17" height="12" uuid="9f481200-dcdc-4858-bed3-9a7d47248389"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+22)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+22)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+22)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="264" width="16" height="12" uuid="892573e6-a3df-48ac-85e9-47268926d6cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+23)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+23)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+23)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="264" width="16" height="12" uuid="54ca3384-e734-4b19-be96-b186e1270bd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+24)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+24)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+24)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="1" y="240" width="15" height="24" uuid="0ba450df-75da-417a-891d-d597e0c068a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="229" width="15" height="11" uuid="7e9ca0d0-ebf5-4d4c-81c2-5bf44f6042e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="264" width="16" height="12" uuid="d392edbc-8e5d-48c4-9482-4385b2a5b617"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{LunesCercano}==($F{fechaInicio}) ?
+"I":($F{LunesCercano}==$F{fechaFinal}?
+"F":($F{LunesCercano}==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="381" y="229" width="1" height="47" uuid="13013118-91b8-441e-8393-ae1cab25b3e0"/>
+			</line>
+			<line>
+				<reportElement x="398" y="229" width="1" height="47" uuid="b0dd0d88-46ff-47b9-9938-b7f770222adc"/>
+			</line>
+			<line>
+				<reportElement x="414" y="229" width="1" height="47" uuid="07b4574c-56c7-4ac0-a3a7-d3a13c0fe2c4"/>
+			</line>
+			<staticText>
+				<reportElement x="414" y="229" width="16" height="11" uuid="f787b877-f227-469c-babe-c6729d6acd97"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<line>
+				<reportElement x="431" y="229" width="1" height="47" uuid="7a8f0d71-8dee-4bac-a84c-78f5c1c6ca47"/>
+			</line>
+			<staticText>
+				<reportElement x="432" y="229" width="16" height="11" uuid="302ce6bc-5d09-4e7b-8c18-229c54122ad7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<line>
+				<reportElement x="448" y="229" width="1" height="47" uuid="17097bc4-7016-42e2-9d6b-aed2490429fc"/>
+			</line>
+			<staticText>
+				<reportElement x="449" y="229" width="16" height="11" uuid="03e2d7e7-feaa-4e38-8023-56d8ca75cf97"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<line>
+				<reportElement x="465" y="229" width="1" height="47" uuid="a9bea311-5fb6-4cbc-b58c-45cb5b71dffb"/>
+			</line>
+			<staticText>
+				<reportElement x="466" y="229" width="16" height="11" uuid="471e4af5-903e-43e7-8200-a1f39c6b88d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="229" width="16" height="11" uuid="acfe011f-a342-4132-a126-9429984f7fc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="229" width="15" height="11" uuid="968767f3-4c6b-46d5-b0fd-7c66b5e9af51"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<line>
+				<reportElement x="514" y="229" width="1" height="47" uuid="2a02bb3a-3b33-4078-b695-028e009b5521"/>
+			</line>
+			<staticText>
+				<reportElement x="515" y="229" width="16" height="11" uuid="37666619-bcfe-4c17-81be-39285cc3467d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<line>
+				<reportElement x="531" y="229" width="1" height="47" uuid="168a479d-fcc7-4abd-b774-5437b1d9e3a1"/>
+			</line>
+			<staticText>
+				<reportElement x="532" y="229" width="16" height="11" uuid="34fa6004-6698-4b60-8d7c-63099671d836"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<line>
+				<reportElement x="548" y="229" width="1" height="47" uuid="816e4ed2-bb31-4dde-bef2-b30f0d820b8a"/>
+			</line>
+			<staticText>
+				<reportElement x="548" y="229" width="17" height="11" uuid="cdbc18a2-01b7-45bc-9fa8-9962264be25e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<line>
+				<reportElement x="565" y="229" width="1" height="47" uuid="6c99284a-bceb-4be1-abbd-4e9d711f1919"/>
+			</line>
+			<staticText>
+				<reportElement x="566" y="229" width="16" height="11" uuid="f78aaa20-f5a4-4673-8d69-1478e8d08ff6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<line>
+				<reportElement x="582" y="229" width="1" height="47" uuid="1c31ccb4-e65e-4861-8fde-76aac10290a9"/>
+			</line>
+			<staticText>
+				<reportElement x="582" y="229" width="16" height="11" uuid="9d4ed256-6a18-47f5-9737-d4fcca6973a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<line>
+				<reportElement x="598" y="229" width="1" height="47" uuid="fa129fde-d460-41ef-aa6e-edcbbe1ad736"/>
+			</line>
+			<staticText>
+				<reportElement x="599" y="229" width="16" height="11" uuid="5e08b44b-7129-428f-bc6b-5b9d46869f39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<line>
+				<reportElement x="615" y="229" width="1" height="47" uuid="5a60d442-320f-4057-9179-48e41ff3ae67"/>
+			</line>
+			<staticText>
+				<reportElement x="616" y="229" width="16" height="11" uuid="8ebd2bbf-0d28-4805-be0d-46d03e1c41ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<line>
+				<reportElement x="632" y="229" width="1" height="47" uuid="a494f8b0-8c4b-49d7-a3be-2909ac4f595f"/>
+			</line>
+			<staticText>
+				<reportElement x="632" y="229" width="17" height="11" uuid="7ed09c37-79fa-46ad-ab21-545d90c08dad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<line>
+				<reportElement x="649" y="229" width="1" height="47" uuid="88f4f2cf-29c0-4dfb-917e-9c7ae0cf199a"/>
+			</line>
+			<staticText>
+				<reportElement x="650" y="229" width="16" height="11" uuid="02e3abfd-6bf0-4311-8e0f-a7f053729da9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<line>
+				<reportElement x="666" y="229" width="1" height="47" uuid="ed3016ad-72ab-4ef5-809c-22d7ca979ecc"/>
+			</line>
+			<staticText>
+				<reportElement x="667" y="229" width="16" height="11" uuid="1ef52713-2d06-4074-9653-5cc3cb1ac4a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<line>
+				<reportElement x="683" y="229" width="1" height="47" uuid="52351834-4e51-4c16-817d-82e9d8fa5348"/>
+			</line>
+			<staticText>
+				<reportElement x="684" y="229" width="16" height="11" uuid="571b7512-41e5-4bea-abd6-9ad1846d31ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<line>
+				<reportElement x="700" y="229" width="1" height="47" uuid="4551c910-5d71-4a52-b248-7b8c1f930448"/>
+			</line>
+			<staticText>
+				<reportElement x="700" y="229" width="17" height="11" uuid="1af239e5-2877-4d9a-bfe1-e3a1970e215f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<line>
+				<reportElement x="717" y="229" width="1" height="47" uuid="daade053-e6ec-4fe2-b05a-62149ad9d03b"/>
+			</line>
+			<staticText>
+				<reportElement x="718" y="229" width="16" height="11" uuid="c6a5c45f-52bc-4a3f-bf3d-ef523f121daa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<line>
+				<reportElement x="734" y="229" width="1" height="47" uuid="f10bb95f-b879-4bb2-8ce4-e35268356f2d"/>
+			</line>
+			<staticText>
+				<reportElement x="734" y="229" width="17" height="11" uuid="e6c2d4b8-67bf-42ca-ba75-20db6e1ac4c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[M]]></text>
+			</staticText>
+			<line>
+				<reportElement x="751" y="229" width="1" height="47" uuid="66cb1d4d-666e-4da0-8c71-14b9c8b971be"/>
+			</line>
+			<staticText>
+				<reportElement x="752" y="229" width="16" height="11" uuid="7ee422d7-1fe9-40f6-8bf8-99b0ce8c15e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[J]]></text>
+			</staticText>
+			<line>
+				<reportElement x="768" y="229" width="1" height="47" uuid="e7b28ccc-8096-4a43-838c-10696f66697f"/>
+			</line>
+			<staticText>
+				<reportElement x="768" y="229" width="17" height="11" uuid="69459c3c-c11d-4070-a831-45ac7e33691f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<line>
+				<reportElement x="785" y="229" width="1" height="47" uuid="378ae35c-b56c-492b-a4ab-9faa36d32444"/>
+			</line>
+			<staticText>
+				<reportElement x="786" y="229" width="17" height="11" uuid="f3b2c815-e614-4661-902a-03413d67ba93"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<textField pattern="dd-MMM">
+				<reportElement x="415" y="240" width="15" height="24" uuid="af7b175d-d3bb-4390-8987-e560ec441c09"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+25]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="432" y="240" width="16" height="24" uuid="2c126ee5-3c4a-4f3d-9e3b-217ae6017093"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+26]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="449" y="240" width="16" height="24" uuid="dacd2fda-9a6b-451d-8f1b-24f3bbeedf52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+27]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="466" y="240" width="16" height="24" uuid="45b34b90-08c1-46cc-8ef6-ec30b0043b7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+28]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="482" y="240" width="16" height="24" uuid="fad43666-3449-4d0b-9a55-58d4d1734539"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+29]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="499" y="240" width="15" height="24" uuid="2776d954-a002-497e-904c-1f94e3f21801"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+30]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="515" y="240" width="16" height="24" uuid="d978c145-0fe7-408a-9f58-4d044688bd8b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+31]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="532" y="240" width="16" height="24" uuid="52db6c99-6937-4e49-8889-1d2a91302c9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+32]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="549" y="240" width="16" height="24" uuid="3d0580d5-1c9b-457f-a7f2-1f4bfc8c205f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+33]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="566" y="240" width="16" height="24" uuid="eaa40525-3107-4bae-a2f1-d90dc542f01e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+34]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="701" y="240" width="16" height="24" uuid="2e426a19-d0d6-441e-9e82-e78ebf9c051d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+42]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="684" y="240" width="16" height="24" uuid="f3fb24fa-b366-4b57-81fa-95bcfd41f6ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+41]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="752" y="240" width="16" height="24" uuid="7fb55330-d327-45ca-9bf5-07ce779f41df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+45]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="718" y="240" width="16" height="24" uuid="71a48e31-473d-447d-9fda-effe095b7211"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+43]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="667" y="240" width="16" height="24" uuid="4ecbad50-2a1a-4a5d-a708-1b4ac19a4880"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+40]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="650" y="240" width="16" height="24" uuid="e1b33a2b-0a67-4be3-8c58-cd6369516c2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+39]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="633" y="240" width="16" height="24" uuid="e8538a8d-43bb-49b3-9f0f-5e1703085a0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+38]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="616" y="240" width="16" height="24" uuid="c184870f-8653-4549-ba04-1c607c1f9b01"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+37]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="599" y="240" width="16" height="24" uuid="9021d349-31e5-4861-ba38-922763e75817"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+36]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="582" y="240" width="16" height="24" uuid="e04271ba-a587-40a1-9ff6-b95d484942a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+35]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="786" y="240" width="16" height="24" uuid="f462da35-94ca-4270-944a-bcd8eff262ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+47]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="769" y="240" width="16" height="24" uuid="dc74a60a-2a28-4c72-9499-33926fb0686b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+46]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement x="735" y="240" width="16" height="24" uuid="0a46c54f-5539-42eb-84f5-0835b5d4cb73"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LunesCercano}+44]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="264" width="16" height="12" uuid="98b291c5-e09d-4934-9cde-6faa49e3f07e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+25)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+25)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+25)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="264" width="16" height="12" uuid="c28f3753-5731-4ab0-9188-d9d44bcc66d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+39)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+39)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+39)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="633" y="264" width="16" height="12" uuid="bbda2237-eef3-4843-a4cb-5fef8be054e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+38)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+38)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+38)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="617" y="264" width="15" height="12" uuid="9958ea43-b216-4c1a-af6f-6f020707d1bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+37)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+37)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+37)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="599" y="264" width="16" height="12" uuid="eed6b191-1cb1-4f2f-b934-11e41ba22041"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+36)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+36)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+36)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="583" y="264" width="15" height="12" uuid="9fc24b95-8b76-48df-b76f-bbd8a424dd4b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+35)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+35)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+35)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="566" y="264" width="16" height="12" uuid="236342b1-115a-4cd2-80eb-60be54fc9c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+34)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+34)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+34)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="548" y="264" width="18" height="12" uuid="749563f9-a71e-465d-be5b-60b9a7533beb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+33)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+33)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+33)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="264" width="16" height="12" uuid="693acb34-7009-4d64-bc42-67cb273770d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+32)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+32)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+32)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="515" y="264" width="17" height="12" uuid="58171b55-266a-4597-b0e4-284b7627b36c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+31)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+31)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+31)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="499" y="264" width="15" height="12" uuid="99958d05-fc79-4997-985c-19e2ce8de706"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+30)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+30)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+30)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="264" width="15" height="12" uuid="8704c2a7-d74f-4759-b956-a567988edb9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+29)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+29)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+29)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="264" width="17" height="12" uuid="b74d00b9-baea-492a-a3c1-1e68df82e3d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="108"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{seleccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="466" y="264" width="16" height="12" uuid="a9b92eee-5f7d-4a10-b757-969a5b22b76c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+28)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+28)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+28)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="264" width="17" height="12" uuid="910d7fed-05bc-4eb0-8ee4-c64554cca989"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+27)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+27)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+27)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="264" width="16" height="12" uuid="6e99f555-f42b-4b42-a318-32e60e2cc823"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+26)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+26)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+26)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="786" y="264" width="16" height="12" uuid="2504cf9b-7b61-426c-8f59-ee5f2f1215b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+47)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+47)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+47)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="753" y="264" width="15" height="12" uuid="7101951d-5aad-4b61-a0ed-3a0c9c3390ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+45)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+45)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+45)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="718" y="264" width="16" height="12" uuid="f1c87dd5-90b3-44eb-98c6-8a9eabba1b93"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+43)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+43)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+43)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="768" y="264" width="16" height="12" uuid="19c89b42-520d-44a0-99a1-a28c4336367d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+46)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+46)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+46)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="735" y="264" width="17" height="12" uuid="6a341169-f957-42fb-b984-eb011351a06a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+44)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+44)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+44)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="701" y="264" width="16" height="12" uuid="19aa9e49-f685-4175-ab18-70ebd89a83b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+42)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+42)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+42)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="684" y="264" width="16" height="12" uuid="0dea4686-7fe7-443d-a2ea-dc9ae94ca94e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+41)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+41)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+41)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="667" y="264" width="16" height="12" uuid="19f2a1bd-1a30-4872-a002-55e3a42afd5d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{LunesCercano}+40)==$F{fechaInicio}?
+"I":(($F{LunesCercano}+40)==$F{fechaFinal}?
+"F":(($F{LunesCercano}+40)==$F{fechaEntrega}?
+"E":"")))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="590" y="-1" width="1" height="218" uuid="0faebff8-be26-44c8-8e99-93cad3b6acab"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="172" splitType="Stretch">
+			<textField>
+				<reportElement x="191" y="6" width="15" height="13" forecolor="#FF0000" uuid="95cf88f4-3804-46b8-813d-8085b1eb516c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dia1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="6" width="78" height="13" forecolor="#FF0000" uuid="cf4995d2-8a2e-4e36-ba8e-df2770965f23"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIAS HABILES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="42" width="4" height="13" uuid="8be39d2c-ca90-4a49-ba63-711ef15236b0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="30" width="4" height="13" uuid="0ad7d1ea-0e39-4f39-9ab0-1c3443faf79b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="18" width="4" height="13" uuid="441b0617-eb13-45c6-813b-2736011fbf82"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="18" width="114" height="13" uuid="df1aa52f-153b-4c6c-94c9-32faa2d60820"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="30" width="114" height="13" forecolor="#FF0000" uuid="2aa59c13-e340-431a-97de-ac3e01ea1d5d"/>
+				<textFieldExpression><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="191" y="42" width="114" height="13" uuid="1f54432f-2a96-41e4-a97c-23d4e9c69db5"/>
+				<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="6" width="4" height="13" uuid="a7767278-c60c-4558-be4d-618da245a458"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="6" width="320" height="13" uuid="9f8d2a05-dd48-4fac-bad5-484c3407a202"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVISAR EN OFICINA CUANDO LA ORDEN DE TRABAJO ESTE CONCLUIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="18" width="38" height="13" uuid="c44d80d3-550a-4072-8526-9e08d3995186"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 1:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="18" width="282" height="13" uuid="a8c7d29e-1dda-4b35-9cb4-4872b97b2cd4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[USAR FILM Y CARTON PARA EL DESPACHO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="30" width="38" height="13" uuid="7087448d-a157-4fb1-b5d9-b8a96f292531"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 2:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="42" width="38" height="13" uuid="239c364e-75af-4fa8-acc2-83790d15ccdb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS 3:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="30" width="282" height="13" uuid="a35b399c-277d-47c5-a309-686b86c97510"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TODOS LOS COMPONENTES DEBEN ESTRA PROTEGIDOS CON ACEITE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="42" width="282" height="13" uuid="7e0c7832-c301-45d3-b3bd-11083a814054"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TODOS LOS VASTAGOS, DEBEN ESTAR PINTADOS (BUEN ACABADO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="171" height="13" uuid="7b793b63-bbd9-469a-a7d4-1e8346a102c7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIAS HABILES EN PLANTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="18" width="171" height="13" uuid="1abd0176-6380-4a83-a6aa-351699cb46c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA INGRESO DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="181" height="13" forecolor="#FF0000" uuid="38069dda-6485-4b9a-99e7-2c43477be103"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA FINALIZACION DE TRABAJO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="171" height="13" uuid="45b5cb5f-7fee-4b0a-911c-381f8359a65c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA ENTREGA DE TRABAJO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="60" width="291" height="111" uuid="47877e9d-5d2a-4347-ba91-da5c56b07f76"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="482" y="60" width="321" height="111" uuid="193f554c-d054-43a0-9968-220d4eb74172"/>
+			</rectangle>
+			<line>
+				<reportElement x="1" y="73" width="291" height="1" uuid="26143741-bdd5-4f29-88d3-456fcc8b3dcd"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="60" width="291" height="13" uuid="eb5664dc-1b7c-48ac-8dda-f91757672232"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MEDIDAS AL INGRESO DEL COMPONENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="482" y="73" width="321" height="1" uuid="2b34ec11-fdb6-4121-9704-ce2d2ab5ded2"/>
+			</line>
+			<staticText>
+				<reportElement x="482" y="60" width="321" height="15" uuid="0602de36-3fd7-4683-9c3e-0b1483a88195"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MEDIDAS AL FINALIZAR COMPONENTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="75" width="287" height="95" uuid="7bf2756f-d1f2-4092-af71-6e3839dcdc86"/>
+				<textFieldExpression><![CDATA[$F{medidasIngreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="75" width="317" height="95" uuid="a8144514-a4a9-4383-8c19-4f7d3a10b1c4"/>
+				<textFieldExpression><![CDATA[$F{medidasFinaliza}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="548d0a8b-1ed7-41f5-b96f-9f9532d1c253">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\ARCRODINPC-06\\Desktop\\1RA-ITERACION-1RA.FASE\\Prueba\\src\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select idCajaChica, fechaCaja, descripcionCaja, egreso, ingreso, sum(egreso) as TotalEgreso, sum(ingreso) as TotalIngreso
+from cajachica where  fechaCaja  between $P{fechaIni} and $P{fechaFin}
+group by idCajaChica;]]>
+	</queryString>
+	<field name="idCajaChica" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaCaja" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcionCaja" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="egreso" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingreso" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalEgreso" class="java.lang.Double"/>
+	<field name="TotalIngreso" class="java.lang.Double"/>
+	<variable name="totalEgreso1" class="java.lang.Float" resetType="Group" resetGroup="idCajaChica" calculation="Sum">
+		<variableExpression><![CDATA[$F{egreso}]]></variableExpression>
+	</variable>
+	<variable name="totalIngreso1" class="java.lang.Float" resetType="Group" resetGroup="idCajaChica" calculation="Sum">
+		<variableExpression><![CDATA[$F{ingreso}]]></variableExpression>
+	</variable>
+	<variable name="totalEgreso2" class="java.lang.Float" resetType="Group" resetGroup="idCajaChica" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalEgreso}]]></variableExpression>
+	</variable>
+	<variable name="totalIngreso2" class="java.lang.Double" resetType="Group" resetGroup="idCajaChica" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalIngreso}]]></variableExpression>
+	</variable>
+	<group name="idCajaChica">
+		<groupExpression><![CDATA[$F{idCajaChica}]]></groupExpression>
+	</group>
+	<group name="idCaja" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{idCajaChica}]]></groupExpression>
+		<groupHeader>
+			<band height="2"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="2"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement x="313" y="13" width="100" height="20" uuid="1f76c1d8-3977-4f03-a31f-de1d26341229"/>
+				<text><![CDATA[TotalEgreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="13" width="100" height="20" uuid="a58b66d7-c764-4010-84ed-e338c8f1dfc9"/>
+				<text><![CDATA[TotalIngreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="13" width="100" height="20" uuid="ccbb9ce6-d579-4fee-bba4-5bdb417d63c5"/>
+				<text><![CDATA[egreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="13" width="100" height="20" uuid="604de760-a543-49c0-b1bf-d74b24454545"/>
+				<text><![CDATA[TotalIngreso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="333" y="0" width="100" height="20" uuid="5c73e50c-df1b-41ca-90b4-ae726f7df3e8"/>
+				<textFieldExpression><![CDATA[$F{TotalEgreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="8f1391a5-75e7-4089-970a-a73bba6d72ed"/>
+				<textFieldExpression><![CDATA[$F{TotalIngreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="0" width="100" height="20" uuid="fc4f165c-0461-48d9-be46-43541aba1aef"/>
+				<textFieldExpression><![CDATA[$F{egreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="0" width="100" height="20" uuid="9119e251-b300-4470-b875-55eda2da58b1"/>
+				<textFieldExpression><![CDATA[$F{TotalIngreso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Immediate">
+			<textField>
+				<reportElement x="375" y="4" width="80" height="20" uuid="15bd901a-f0a6-4640-9fea-a0d5c7ac573c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="4" width="40" height="20" uuid="de93e78a-1e3e-428d-a3ff-62552bac9840"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="51" splitType="Stretch">
+			<elementGroup>
+				<subreport>
+					<reportElement x="356" y="0" width="199" height="50" uuid="67eea0a3-f0f9-4a88-a040-e74a44b89ce8"/>
+					<subreportParameter name="fechaIni">
+						<subreportParameterExpression><![CDATA[$P{fechaIni}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="fechaFin">
+						<subreportParameterExpression><![CDATA[$P{fechaFin}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report1_subreport2.jasper"]]></subreportExpression>
+				</subreport>
+			</elementGroup>
+		</band>
+	</summary>
+</jasperReport>

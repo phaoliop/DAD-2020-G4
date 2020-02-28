@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoPrueba_1_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="88c93b83-2a47-4018-bcb8-3da715d72ccb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idOrdenTrabajo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select o.idOrdenDeTrabajo, p.numPedido, o.numOrdenTrabajo,c.codProforma, o.fechaEmision, o.tipoServicio,
+o.recepcion, o.destino, p.dia1, p.dia2, o.fechaInicio, day(o.fechaInicio) as numDiaInicio, month(o.fechaInicio) as numMesInicio,
+    CASE DAYOFWEEK(o.fechaInicio)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaInicio, o.fechaFinal,day(o.fechaFinal) as numDiaFinal, CASE DAYOFWEEK(o.fechaFinal)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaFinal, o.fechaEntrega, day(o.fechaEntrega) as numDiaEntrega, CASE DAYOFWEEK(o.fechaEntrega)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+    END diaEntrega, if(DAYOFWEEK(o.fechaInicio)=1,day(o.fechaInicio)-6,if(DAYOFWEEK(o.fechaInicio)=2,day(o.fechaInicio),
+	if(DAYOFWEEK(o.fechaInicio)=3, day(o.fechaInicio)-1,if(DAYOFWEEK(o.fechaInicio)=4,day(o.fechaInicio)-2,
+    if(DAYOFWEEK(o.fechaInicio)=5,day(o.fechaInicio)-3,if(DAYOFWEEK(o.fechaInicio)=6, day(o.fechaInicio)-3,
+    if(DAYOFWEEK(o.fechaInicio)=7,day(o.fechaInicio)-5,null))))))) as LunesCercano, d.item, d.cant, d.descripcion, d.tolerancia 
+ from ordendetrabajo o, detalleordentrabajo d, proforma c, pedido p
+ where (d.idOrdenTrabajofk=o.idOrdenDeTrabajo and o.idPedidofkk=p.idPedido 
+		and p.idProforma_fk=c.idProforma) and o.idOrdenDeTrabajo=$P{idOrdenTrabajo}]]>
+	</queryString>
+	<field name="idOrdenDeTrabajo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numPedido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numOrdenTrabajo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codProforma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="recepcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="destino" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaInicio" class="java.lang.Long"/>
+	<field name="numMesInicio" class="java.lang.Long"/>
+	<field name="diaInicio" class="java.lang.String"/>
+	<field name="fechaFinal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaFinal" class="java.lang.Long"/>
+	<field name="diaFinal" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numDiaEntrega" class="java.lang.Long"/>
+	<field name="diaEntrega" class="java.lang.String"/>
+	<field name="LunesCercano" class="java.lang.Long"/>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cant" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tolerancia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="idOrdenDeTrabajo">
+		<groupExpression><![CDATA[$F{idOrdenDeTrabajo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="13">
+			<textField>
+				<reportElement x="0" y="0" width="30" height="13" uuid="4c8a6b34-0fd3-4ccc-8e19-9fc37f9370bc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

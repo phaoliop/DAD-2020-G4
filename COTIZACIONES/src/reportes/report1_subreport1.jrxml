@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_subreport1" language="groovy" pageWidth="170" pageHeight="50" whenNoDataType="BlankPage" columnWidth="170" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2edda379-28fa-4959-855c-c138fa8718a1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select round(sum(egreso),2)Egreso, round(sum(ingreso),2)Ingreso, round((sum(ingreso)-sum(egreso)),2) as TotalCosto
+from cajachica where  fechaCaja  between $P{fechaIni} and $P{fechaFin};]]>
+	</queryString>
+	<field name="Egreso" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Ingreso" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalCosto" class="java.lang.Double"/>
+	<variable name="Egreso_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Egreso}]]></variableExpression>
+	</variable>
+	<variable name="Ingreso_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Ingreso}]]></variableExpression>
+	</variable>
+	<variable name="TotalCosto_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalCosto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<textField evaluationTime="Column">
+				<reportElement x="4" y="5" width="100" height="20" uuid="2f58a0d5-9d13-4b18-8b71-345702936df3"/>
+				<textFieldExpression><![CDATA[$V{Egreso_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="104" y="3" width="100" height="20" uuid="9460c4f4-4748-439f-aa87-7959fa67f0ec"/>
+				<textFieldExpression><![CDATA[$V{Ingreso_1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Column">
+				<reportElement x="104" y="23" width="100" height="20" uuid="5e97a01e-f450-4e05-be67-834cf8454b71"/>
+				<textFieldExpression><![CDATA[$V{TotalCosto_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

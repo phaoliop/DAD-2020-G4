@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9b6c246-c174-4945-b004-e1ba78512230">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="233"/>
+	<property name="ireport.y" value="299"/>
+	<parameter name="idGuia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select idGuiaRemision,serieGuia, numGuia,fechaEmision, fechaTraslado, 
+	   direccionPartida, direccionLlegada, 
+       razonSocial, ruc,tipoDocCli,fkidmotivoGuia,motivoDescripcion,
+       vehMarca, vehCertificado, vehLicencia, 
+       nombreTransp, rucTransp, 
+       tipoComprobante, numComprobante,
+       cant, codigo, descripcion, unidadMedida, motivo
+	    
+from guiaremision, cliente, detalleguiaremision, motivoguia
+where (guiaremision.fkidCliente=cliente.idCliente and detalleguiaremision.idGuiaRemisionfk= guiaremision.idGuiaRemision and guiaremision.fkidmotivoGuia=motivoguia.idMotivoGuia) and idGuiaRemision=$P{idGuia};]]>
+	</queryString>
+	<field name="idGuiaRemision" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serieGuia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numGuia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaTraslado" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionPartida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionLlegada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ruc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoDocCli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fkidmotivoGuia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="motivoDescripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vehMarca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vehCertificado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vehLicencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreTransp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rucTransp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoComprobante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numComprobante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cant" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidadMedida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="motivo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="motivoDescrip" class="java.lang.Integer"/>
+	<group name="idGuiaRemision">
+		<groupExpression><![CDATA[$F{idGuiaRemision}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<textField>
+				<reportElement x="402" y="103" width="48" height="14" uuid="cd9ae3ba-c707-437f-95e4-cda18003eb30"/>
+				<textFieldExpression><![CDATA[$F{numGuia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="103" width="25" height="14" uuid="24437859-adc8-411e-bc2d-da78718edc82"/>
+				<textFieldExpression><![CDATA[$F{serieGuia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="103" width="6" height="14" uuid="8ece4807-1c58-4243-a28e-6d1e2dc90c46"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="223">
+			<textField>
+				<reportElement x="55" y="166" width="100" height="14" uuid="0942924e-6b18-400d-b968-90bd1fc48474"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="140" width="251" height="33" uuid="8c965911-0c13-4297-ad31-fe037bcf7d9b"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="66" width="250" height="53" uuid="391e9e6b-dffb-4148-a105-747c8da52dfd"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionPartida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="73" y="26" width="100" height="20" uuid="d1a7171b-5afc-4196-953a-745d9bb07570"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="67" width="241" height="53" uuid="c08a880c-1632-45cd-a931-816298d160a0"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionLlegada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="137" width="100" height="14" uuid="8028e5d4-ad56-4fcd-816f-fb71e8105b1c"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehMarca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="158" width="100" height="14" uuid="3ff6eca6-5cd4-41c7-b2fb-8b5279fedfd3"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehCertificado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="179" width="100" height="13" uuid="a25c4f3c-a3f8-40f3-9213-e0bb0dec1323"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehLicencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="361" y="28" width="100" height="20" uuid="2ca389ab-4586-4b2b-ac0d-3aa4bc9956f4"/>
+				<textElement>
+					<font fontName="Verdana" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaTraslado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="183" width="130" height="13" uuid="21305d7c-ea04-4f22-a14b-d059f98326dd"/>
+				<textElement>
+					<font fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoDocCli}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="111" y="0" width="382" height="10" uuid="175717e2-572a-4da1-b17a-2b21e117ae37"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="40" height="10" uuid="99f0095a-7234-4296-ac2b-4cab46aa7f36"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="41" height="10" uuid="07d1c4fb-9e48-47fb-a24e-ec0b19a328ef"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="0" width="48" height="10" uuid="bd3f9a3f-f531-45e4-8f16-f2f8f0e1ef1b"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidadMedida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="70"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="104">
+			<textField>
+				<reportElement x="60" y="4" width="131" height="16" uuid="0fbff6a6-66cf-4b39-b874-656c21793bf7"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreTransp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="20" width="131" height="15" uuid="0e302e8a-5864-44b5-b2c1-da5b162cebb7"/>
+				<textElement>
+					<font fontName="Verdana" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rucTransp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="58" width="111" height="16" uuid="404f3203-c52c-4d5c-9c02-135b1494f6b1"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoComprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="72" width="140" height="16" uuid="f2652609-d152-4691-b1e2-10733e9f62b5"/>
+				<textElement>
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numComprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="65" width="54" height="30" uuid="2c8defa6-8d25-4f17-bda3-a323ac95f65b"/>
+				<textElement>
+					<font fontName="Verdana" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{motivoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="314" y="-8" width="20" height="15" uuid="39ea1b30-c9f9-4a62-aa9a-a840d119c892"/>
+				<textFieldExpression><![CDATA[$F{fkidmotivoGuia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

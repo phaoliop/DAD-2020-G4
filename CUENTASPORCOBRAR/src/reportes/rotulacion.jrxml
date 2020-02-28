@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" isIgnorePagination="true" uuid="3c62cc65-f239-471c-9afe-b4f92ed19a0d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idRotulacion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select r.idRotulacion, r.remitente, c.razonSocial,concat(l.nombres,' ', l.apellidos,' D.N.I.:', l.dni), r.destino
+from rotulacion r, rotulacionatencion a, cliente c, contactocliente l
+where  (a.fkkidContactoCliente=l.idContactoCliente 
+		and r.fkkidCliente=c.idCliente 
+        and a.idRotulacionfk=r.idRotulacion) and a.idRotulacionfk=$P{idRotulacion};]]>
+	</queryString>
+	<field name="idRotulacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remitente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concat(l.nombres,&apos; &apos;, l.apellidos,&apos; D.N.I.:&apos;, l.dni)" class="java.lang.String"/>
+	<field name="destino" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="idRotulacion">
+		<groupExpression><![CDATA[$F{idRotulacion}]]></groupExpression>
+		<groupFooter>
+			<band/>
+			<band height="158">
+				<textField>
+					<reportElement x="170" y="1" width="407" height="26" uuid="c774c34f-1503-48e1-9196-c1b4f35b8d19"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="29" width="801" height="1" uuid="a3bcd340-1c85-4a89-8818-0f9b70099346"/>
+				</line>
+				<staticText>
+					<reportElement x="-4" y="48" width="174" height="27" uuid="61dd3bfa-5903-4e31-92bc-52e4e6f076e0"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REMITENTE      ]]></text>
+				</staticText>
+				<subreport>
+					<reportElement x="173" y="129" width="383" height="27" uuid="8a25554d-084b-4245-ba32-b5f0568c7d88"/>
+					<subreportParameter name="idRotulacion">
+						<subreportParameterExpression><![CDATA[$F{idRotulacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement x="-6" y="79" width="179" height="31" uuid="d8dd1e8d-6712-45c0-826d-7f947724aeb5"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINATARIO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="171" y="48" width="385" height="27" uuid="2aa0c1de-64d1-491a-a6fb-239bfe138156"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-4" y="129" width="177" height="27" uuid="79286d98-d2c8-46b3-a1c6-3aa26c0def22"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ATENCIÓN        ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-4" y="3" width="174" height="26" uuid="5cbb3d6a-6d31-4fe3-aa48-ad1f21153f12"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINO   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="161" y="1" width="10" height="28" uuid="7c00387c-7013-419c-8b88-6f8af840f7c4"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="173" y="78" width="631" height="52" uuid="7ac3cee5-4f3e-4af5-bac6-e3dae92545b3"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="162" y="48" width="10" height="28" uuid="81250cdd-9d0d-439b-94a6-287ff57e9428"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="162" y="79" width="10" height="28" uuid="64e73a11-66d4-4faf-9b8c-c2391f37a9f7"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="163" y="128" width="10" height="28" uuid="1f2ffeb3-1d5a-4654-ab3b-30c0a2edce13"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+			<band height="162">
+				<subreport>
+					<reportElement x="173" y="132" width="386" height="25" uuid="68a33fb1-9799-42a0-853f-f079f9c6ec20"/>
+					<subreportParameter name="idRotulacion">
+						<subreportParameterExpression><![CDATA[$F{idRotulacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+				</subreport>
+				<textField>
+					<reportElement x="172" y="2" width="471" height="27" uuid="688e358f-19ae-467c-a2f4-5d2f786b7839"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-6" y="3" width="179" height="27" uuid="ecf8719a-59a9-4b34-b2b9-1daeb1d8776f"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINO           :]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="35" width="802" height="1" uuid="028c60b4-9f69-4ac0-885a-b6f57a9f0e57"/>
+				</line>
+				<staticText>
+					<reportElement x="-5" y="132" width="178" height="26" uuid="49a70ec4-5f30-45d6-bd21-d0e3b792ab08"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ATENCIÓN        ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-6" y="49" width="179" height="27" uuid="c288253b-94d5-4388-a177-149d2fb444c9"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REMITENTE      ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-6" y="82" width="179" height="26" uuid="8ffefce3-1f55-46d5-a3b3-9c4dd1d10c0a"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINATARIO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="173" y="47" width="381" height="29" uuid="5c2f7275-3507-463f-ae63-a5479776542a"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="163" y="3" width="10" height="28" uuid="c2174abc-4a18-408e-9de7-db598e23730b"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="163" y="48" width="10" height="28" uuid="eb68ffd1-1c64-4dcd-a0e5-47df7597ea5d"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="163" y="82" width="10" height="28" uuid="617de12b-44bd-43eb-8bf0-e2560ee9a3f9"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="163" y="131" width="10" height="28" uuid="94e0f89f-7fc2-4406-9fc4-e7fd708c8cf8"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="173" y="81" width="631" height="52" uuid="f48766bd-a56a-4a88-9c40-688c611b7307"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="163">
+				<textField>
+					<reportElement x="173" y="0" width="382" height="27" uuid="765c3f3f-1fc2-4db7-98a8-3b939e81abb1"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-6" y="2" width="179" height="27" uuid="78013c10-d2c0-4e2d-986e-7ad83a469eb3"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINO           :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-6" y="48" width="179" height="28" uuid="f941946f-1cc5-4f2c-b215-43956853bcb7"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REMITENTE      ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-6" y="81" width="179" height="27" uuid="c2f94131-8b8b-49b1-b049-1af5635189fd"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINATARIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-5" y="133" width="178" height="26" uuid="15d5f30b-6248-4f97-836a-5fa33f7e7a6e"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ATENCIÓN        ]]></text>
+				</staticText>
+				<line>
+					<reportElement x="2" y="33" width="799" height="1" uuid="73f3d522-a606-4c2d-a1b9-0295bfe3d42d"/>
+				</line>
+				<textField>
+					<reportElement x="173" y="48" width="432" height="28" uuid="db2509ed-2f1a-4025-9dd5-10f7f23c776b"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement x="173" y="133" width="382" height="26" uuid="ef1dcc2c-9062-4466-b7f8-20663bbb808c"/>
+					<subreportParameter name="idRotulacion">
+						<subreportParameterExpression><![CDATA[$F{idRotulacion}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement x="163" y="2" width="10" height="28" uuid="42d7b981-8609-42f5-b143-260884b95a14"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="173" y="80" width="631" height="52" uuid="a1fea9a9-c670-410e-9512-146183296a57"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="163" y="48" width="10" height="28" uuid="8d2326c8-4763-476f-b9b4-974b06e06430"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="163" y="81" width="10" height="28" uuid="cc51d60a-0620-412c-8d72-6fae07b6109f"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="164" y="132" width="10" height="28" uuid="01e30be4-81a8-4623-b063-22847c96a771"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+			<band height="53">
+				<staticText>
+					<reportElement x="-6" y="4" width="180" height="26" uuid="42ded35f-c31a-4f9b-b53e-8f0bf93c3bef"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESTINO           ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="174" y="4" width="431" height="26" uuid="9bb85bff-7026-45d3-8af0-d36fd612b98a"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="1" y="39" width="800" height="1" uuid="de158604-a710-4a06-9d94-821bdf5b2098"/>
+				</line>
+				<staticText>
+					<reportElement x="164" y="4" width="10" height="28" uuid="86646b1f-5391-4f12-b173-308e683f1487"/>
+					<textElement>
+						<font fontName="Arial Black" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="2" splitType="Stretch">
+			<line>
+				<reportElement x="-1" y="1" width="802" height="1" uuid="212b32b4-c160-46b4-89a6-9bdc3c3033a7"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="111" splitType="Stretch">
+			<textField>
+				<reportElement x="170" y="6" width="421" height="26" uuid="97eed8b4-93d9-494c-9673-d30128b2f9c2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="34" width="632" height="52" uuid="42ad525b-1c3c-4af1-b206-1d817f595897"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-4" y="6" width="174" height="28" uuid="eda6dade-ca82-42c1-9c79-34713a086633"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REMITENTE      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-4" y="35" width="174" height="27" uuid="680906a8-8e27-4d99-9def-ffb8edc30f3a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESTINATARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-4" y="84" width="174" height="26" uuid="7f6d2a0e-e65a-4c9b-9194-93bd71683ecc"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATENCIÓN        ]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="170" y="84" width="407" height="26" uuid="ac1c7561-d75d-4b1d-87ff-2b840435e9e4"/>
+				<subreportParameter name="idRotulacion">
+					<subreportParameterExpression><![CDATA[$F{idRotulacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="161" y="35" width="10" height="26" uuid="cd5cf0b4-b027-4782-a7df-4829b9f54a0b"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="6" width="10" height="26" uuid="f956c032-7739-483a-976f-05ce0483d36e"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="84" width="10" height="26" uuid="99ddbffc-ab6a-46a9-afab-2f9115e228ae"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
